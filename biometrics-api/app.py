@@ -16,7 +16,7 @@ from logs.routes import logs_bp
 from users.routes import users_bp
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
