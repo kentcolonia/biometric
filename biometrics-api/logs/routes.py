@@ -23,9 +23,8 @@ def get_all_logs():
     punch = request.args.get('punch')           # 0 or 1
 
     query = AttendanceLog.query.options(joinedload(AttendanceLog.device))
-
     if location:
-        query = query.join(Device).filter(Device.location == location)
+        query = query.join(Device, AttendanceLog.device_id == Device.id).filter(Device.location == location)
 
     if user_id:
         query = query.filter(AttendanceLog.user_id.ilike(f'%{user_id}%'))
